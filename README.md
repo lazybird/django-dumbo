@@ -1,7 +1,7 @@
 Django Dumbo
 ============
 
-django-dumbo provides management commands for dumbing and loading your
+django-dumbo provides management commands for dumping and loading your
 project database and media files. It comes with spatial database support.
 It works with postgreSQL.
 
@@ -69,6 +69,13 @@ You can customize the `pg_dump` `pg_restore` options with these setting:
     DUMBO_PG_DUMP_OPTIONS = '--no-owner --no-privileges --format=c',
 
     DUMBO_PG_RESTORE_OPTIONS = '--format=c',
+
+
+For instance, here is how you could exclude the Django session table.
+You will have to run `syncdb` to recreate it after loading the data.
+
+    DUMBO_PG_DUMP_OPTIONS = '--no-owner --no-privileges --exclude-table=django_session --format=c'
+
 
 You can also customize the options for the `createdb` command.
 
