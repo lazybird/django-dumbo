@@ -1,6 +1,6 @@
 import os
 
-from django.core.management.base import BaseCommand
+from django.core.management.base import BaseCommand, CommandError
 
 from dumbo import settings as dumbo_settings
 from dumbo.management.commands.base import DumboCommand
@@ -11,11 +11,26 @@ class Command(DumboCommand, BaseCommand):
 
     def handle(self, **options):
         self.set_dump_dir(options)
+        self.check_sensitive_keywords()
         self.reset_database()
         self.enable_spatial_database()
         self.load_data()
         self.set_media_dir()
         self.copy_media_files()
+
+    def check_sensitive_keywords(self):
+        db_name = self.database_params['name']
+        sensitive_keywords = dumbo_settings.DUMBO_SENSITIVE_KEYWORDS
+        if any(keyword in db_name for keyword in sensitive_keywords):
+            response = raw_input(
+                'You are about to drop and restore this database: "{}".'
+                ' Are you sure you want to do this?'
+                '\nType "yes" to continue: '.format(db_name)
+            )
+            if response != "yes":
+                raise CommandError(
+                    'Exiting. Not allowed to load data on "{}"'.format(db_name)
+                )
 
     def reset_database(self):
         params = self.database_params.copy()

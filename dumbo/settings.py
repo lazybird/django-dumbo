@@ -7,6 +7,10 @@ DUMBO_SQL_FILE = 'database.dump'
 
 DUMBO_MEDIA_DUMP_DIR = 'files/'
 
+# A list of keywords that will be checked against the database name.
+# Raised a warning if one of these words appear on the database name.
+DUMBO_SENSITIVE_KEYWORDS = getattr(settings, 'DUMBO_SENSITIVE_KEYWORDS', ['live'])
+
 DUMBO_RSYNC_OPTIONS = getattr(settings, 'DUMBO_RSYNC_OPTIONS',
     '--recursive --links --times --omit-dir-times '
     '--verbose --delete --exclude=.svn'

@@ -92,3 +92,10 @@ In addition to creating PostGIS extension, some tables permissions
 will be altered. You can configure the list of tales:
 
     DUMBO_POSTGIS_TABLES = ('spatial_ref_sys', 'geometry_columns', 'geography_columns')
+
+### Sensitive keywords in database name
+
+You can raise a warning message and prompt the user for authorisation when
+a given keywords is found in the database name.
+
+    DUMBO_SENSITIVE_KEYWORDS = ['staging', 'live']
