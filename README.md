@@ -3,6 +3,7 @@ Django Dumbo
 
 django-dumbo provides management commands for dumbing and loading your
 project database and media files. It comes with spatial database support.
+It works with postgreSQL.
 
 Usage Example
 -------------
