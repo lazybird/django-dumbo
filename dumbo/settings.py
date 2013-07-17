@@ -22,7 +22,7 @@ DUMBO_PG_DUMP_OPTIONS = getattr(settings, 'DUMBO_PG_DUMP_OPTIONS',
 
 # Should not contain the '--dbname' option. It will be added automatically.
 DUMBO_PG_RESTORE_OPTIONS = getattr(settings, 'DUMBO_PG_RESTORE_OPTIONS',
-    '--format=c',
+    '--no-owner --no-privileges --format=c',
 )
 
 DUMBO_CREATE_DB_OPTIONS = getattr(settings, 'DUMBO_CREATE_DB_OPTIONS', '')
